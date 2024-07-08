@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
+import { setRandomResult } from "../redux/slices/info";
+import { useAppDispatch } from "../redux/store";
 
 export const Cube = forwardRef((_, ref) => {
 
@@ -59,12 +61,17 @@ export const Cube = forwardRef((_, ref) => {
   const [isRolling, setIsRolling] = useState(false);
   const diceRef = useRef<HTMLDivElement>(null);
 
+  const dispatch = useAppDispatch();
+
   const rollDice = () => {
     setIsRolling(true);
     setTimeout(() => {
       const randomSide = Math.floor(Math.random() * diceSides.length);
       setCurrentSide(randomSide);
       setIsRolling(false);
+
+      const trueResult = randomSide + 1;
+      dispatch(setRandomResult(trueResult));
     }, 1500); 
   };
 
@@ -82,16 +89,14 @@ export const Cube = forwardRef((_, ref) => {
   return (
     <div className="dice-container">
       <div className={`dice ${isRolling ? 'rolling' : ''}`} data-side={currentSide + 1}>
-        <div className="face one">{diceSides[0]}</div>
-        <div className="face two">{diceSides[1]}</div>
-        <div className="face three">{diceSides[2]}</div>
-        <div className="face four">{diceSides[3]}</div>
-        <div className="face five">{diceSides[4]}</div>
-        <div className="face six">{diceSides[5]}</div>
+        <div className="face one" >{diceSides[0]}</div>
+        <div className="face two" >{diceSides[1]}</div>
+        <div className="face three" >{diceSides[2]}</div>
+        <div className="face four" >{diceSides[3]}</div>
+        <div className="face five" >{diceSides[4]}</div>
+        <div className="face six" >{diceSides[5]}</div>
       </div>
     </div>
   );
 });
-
-
 

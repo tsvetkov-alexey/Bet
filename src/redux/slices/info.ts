@@ -2,6 +2,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 
 export interface InfoState {
+  modal: boolean,
+  isAuth: boolean,
+  balance: number,
+  status: string,
+  randomResult: number,
   currentBet: string,
   evenNum: boolean,
   oddNum: boolean,
@@ -11,6 +16,11 @@ export interface InfoState {
 }
 
 const initialState: InfoState = {
+  modal: false,
+  isAuth: false,
+  balance: 1000,
+  status: 'beginning',
+  randomResult: 1,
   currentBet: '1.00',
   evenNum: false,
   oddNum: false,
@@ -23,6 +33,21 @@ export const infoSlice = createSlice({
   name: 'info',
   initialState,
   reducers: {
+    setModal(state, action: PayloadAction<boolean>) {
+      state.modal = action.payload;
+    },
+    setIsAuth(state, action: PayloadAction<boolean>) {
+      state.isAuth = action.payload;
+    },
+    setBalance(state, action: PayloadAction<number>) {
+      state.balance = action.payload;
+    },
+    setStatus(state, action: PayloadAction<string>) {
+      state.status = action.payload;
+    },
+    setRandomResult(state, action: PayloadAction<number>) {
+      state.randomResult = action.payload;
+    },
     setCurrentBet(state, action: PayloadAction<string>) {
       state.currentBet = action.payload;
     },
@@ -44,7 +69,7 @@ export const infoSlice = createSlice({
   },
 })
 
-export const { setEvenNum, setOddNum, setOneToThree, setFourToSix, setCertainNum, setCurrentBet  } = infoSlice.actions
+export const { setModal, setIsAuth, setBalance, setStatus, setEvenNum, setOddNum, setOneToThree, setFourToSix, setCertainNum, setCurrentBet, setRandomResult  } = infoSlice.actions
 export const selectInfo = (state: RootState) => state.info;
 
 export default infoSlice.reducer
