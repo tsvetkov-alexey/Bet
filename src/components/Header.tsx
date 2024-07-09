@@ -13,7 +13,7 @@ export const Header = () => {
         <h5>{balance} (TND)</h5> : 
         <div className="auth">
           <button className="signIn" onClick={() => dispatch(setModal(true))}>Вход</button>
-          <button className="signUp">Регистрация</button>
+          <button className="signUp" disabled>Регистрация</button>
         </div>
       }
     </header>

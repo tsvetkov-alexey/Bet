@@ -37,26 +37,37 @@ header {
       margin-right: 8px;
     }
 
-    &:hover {
-      background: #8151A8;
-      border-bottom: 1px solid #AB69E2;
-      cursor: pointer;
+    &.signIn {
+      &:hover {
+        background: #8151A8;
+        border-bottom: 1px solid #AB69E2;
+        cursor: pointer;
+      }
+    }
+
+    &.signUp {
+      &:disabled {
+        opacity: 30%;
+        cursor: auto;
+      }
     }
   }
+  
 }
 
 .bet-container {
   margin: 100px 40%;
   width: 20%;
-  text-align: center;
   
   h4 {
     font-size: 20px;
     font-weight: 700;
+    text-align: center;
   }
 
   p {
     margin-top: 8px;
+    text-align: center;
   }
 }
 
@@ -189,6 +200,7 @@ header {
         padding-bottom: 4px;
         border: 1px solid #3893FF;
         border-radius: 6px;
+        z-index: 10;
 
         span {
           margin-bottom: 4px;
@@ -341,6 +353,10 @@ header {
         padding: 8px 12px;
         font-size: 16px;
         outline: none;
+
+        &.wrong {
+          border: 1px solid red;
+        }
       }
 
       button {
@@ -355,6 +371,24 @@ header {
         &:hover {
           cursor: pointer;
         }
+
+        &:disabled {
+          opacity: 30%;
+          cursor: auto;
+        }
+      }
+
+      .loading {
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: -30px;
+        // color: #AB69E2
+      }
+
+      .wentWrond {
+        color: #ff5454;
+        margin-bottom: 12px;
+        text-align: center;
       }
     }
 

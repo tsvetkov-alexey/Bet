@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
 
 export interface InfoState {
+  pageLoading: boolean,
   modal: boolean,
   isAuth: boolean,
   balance: number,
@@ -16,6 +17,7 @@ export interface InfoState {
 }
 
 const initialState: InfoState = {
+  pageLoading: false,
   modal: false,
   isAuth: false,
   balance: 1000,
@@ -33,6 +35,9 @@ export const infoSlice = createSlice({
   name: 'info',
   initialState,
   reducers: {
+    setPageLoading(state, action: PayloadAction<boolean>) {
+      state.pageLoading = action.payload;
+    },
     setModal(state, action: PayloadAction<boolean>) {
       state.modal = action.payload;
     },
@@ -69,7 +74,7 @@ export const infoSlice = createSlice({
   },
 })
 
-export const { setModal, setIsAuth, setBalance, setStatus, setEvenNum, setOddNum, setOneToThree, setFourToSix, setCertainNum, setCurrentBet, setRandomResult  } = infoSlice.actions
+export const { setPageLoading, setModal, setIsAuth, setBalance, setStatus, setEvenNum, setOddNum, setOneToThree, setFourToSix, setCertainNum, setCurrentBet, setRandomResult  } = infoSlice.actions
 export const selectInfo = (state: RootState) => state.info;
 
 export default infoSlice.reducer

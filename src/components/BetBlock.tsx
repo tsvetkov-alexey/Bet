@@ -3,19 +3,22 @@ import arrowUp from '../assets/svg/arrowUp.svg';
 import { BetAmount } from './BetAmount';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectInfo, setCertainNum, setEvenNum, setFourToSix, setOddNum, setOneToThree } from '../redux/slices/info';
+import { selectInfo, setCertainNum, setEvenNum, setFourToSix, setOddNum, setOneToThree, setStatus, setBalance } from '../redux/slices/info';
 import { useAppDispatch } from '../redux/store';
 import { Cube } from './Cube';
 import { StatusBlock } from './StatusBlock';
+import { calcResult } from '../utils/calcResult';
+import { RootState } from '../redux/store';
 
 export const BetBlock = () => {
   const [optionsVisible, setOptionsVisible] = useState(false);
+  const [rollCount, setRollCount] = useState(0);
 
   const cubeRef = useRef<{ rollDice: () => void, isRolling: boolean }>(null);
   const betAmountRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useAppDispatch();
-  const { isAuth, evenNum, oddNum, oneToThree, fourToSix, certainNum, currentBet } = useSelector(selectInfo);
+  const { isAuth, evenNum, oddNum, oneToThree, fourToSix, certainNum, currentBet, randomResult, balance } = useSelector((state: RootState) => selectInfo(state));
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -49,13 +52,25 @@ export const BetBlock = () => {
   const handleMakeBet = () => {
     if (cubeRef.current && !cubeRef.current.isRolling) {
       cubeRef.current.rollDice();
+      setRollCount((prev) => prev + 1)
     }
   };
 
+  useEffect(() => {
+    const betType = evenNum ? 'evenNum' : oddNum ? 'oddNum' : oneToThree ? 'oneToThree' : fourToSix ? 'fourToSix' : 'certainNum';
+    calcResult({
+      diceResult: randomResult,
+      betType,
+      currentBet,
+      balance,
+      setBalance: (newBalance) => dispatch(setBalance(newBalance)),
+      setStatus: (status) => dispatch(setStatus(status)),
+    });
+  }, [cubeRef.current?.isRolling, randomResult, rollCount])
 
   return (
     <div className='bet-container'>
-      {<StatusBlock/>}
+      {<StatusBlock />}
       <div className={`bet ${isAuth ? '' : 'blur'}`}>
         {!isAuth && <div className="overlay"></div>}
         <Cube ref={cubeRef} />
@@ -66,13 +81,13 @@ export const BetBlock = () => {
             ref={betAmountRef}>
             <div className="startSum">
               <span>{currentBet}</span>
-                {optionsVisible ? <img src={arrowUp} alt='arrowUp'/> 
-                : 
-                <img src={arrowDown} alt='arrowDown'/> }
+              {optionsVisible ? <img src={arrowUp} alt='arrowUp' />
+                :
+                <img src={arrowDown} alt='arrowDown' />}
             </div>
             {optionsVisible && <BetAmount />}
           </div>
-          
+
           <div className="bet-options">
             <span>Варианты ставок</span>
             <div className="bet-buttons">
@@ -94,4 +109,4 @@ export const BetBlock = () => {
       </div>
     </div>
   );
-}
+};
