@@ -1,9 +1,9 @@
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './scss/styles.scss'
-import { store } from './redux/store.ts'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import App from './App.tsx';
+import { store } from './redux/store.ts';
+import './scss/styles.scss';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
@@ -11,4 +11,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <App />
     </BrowserRouter>
   </Provider>,
-)
+);

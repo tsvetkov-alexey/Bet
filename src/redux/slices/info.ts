@@ -1,22 +1,25 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface InfoState {
-  pageLoading: boolean,
-  modal: boolean,
-  isAuth: boolean,
-  balance: number,
-  status: string,
-  randomResult: number,
-  currentBet: string,
-  evenNum: boolean,
-  oddNum: boolean,
-  oneToThree: boolean,
-  fourToSix: boolean,
-  certainNum: boolean
+  winAmount: number;
+  pageLoading: boolean;
+  modal: boolean;
+  isAuth: boolean;
+  balance: number;
+  status: string;
+  randomResult: number;
+  currentBet: string;
+  evenNum: boolean;
+  oddNum: boolean;
+  oneToThree: boolean;
+  fourToSix: boolean;
+  certainNum: boolean;
+  certainNumValue: string | number;
 }
 
 const initialState: InfoState = {
+  winAmount: 0,
   pageLoading: false,
   modal: false,
   isAuth: false,
@@ -28,13 +31,20 @@ const initialState: InfoState = {
   oddNum: false,
   oneToThree: false,
   fourToSix: false,
-  certainNum: false
-}
+  certainNum: false,
+  certainNumValue: '',
+};
 
 export const infoSlice = createSlice({
   name: 'info',
   initialState,
   reducers: {
+    setWinAmount(state, action: PayloadAction<number>) {
+      state.winAmount = action.payload;
+    },
+    setCertainNumValue(state, action: PayloadAction<string | number>) {
+      state.certainNumValue = action.payload;
+    },
     setPageLoading(state, action: PayloadAction<boolean>) {
       state.pageLoading = action.payload;
     },
@@ -72,9 +82,24 @@ export const infoSlice = createSlice({
       state.certainNum = action.payload;
     },
   },
-})
+});
 
-export const { setPageLoading, setModal, setIsAuth, setBalance, setStatus, setEvenNum, setOddNum, setOneToThree, setFourToSix, setCertainNum, setCurrentBet, setRandomResult  } = infoSlice.actions
+export const {
+  setWinAmount,
+  setCertainNumValue,
+  setPageLoading,
+  setModal,
+  setIsAuth,
+  setBalance,
+  setStatus,
+  setEvenNum,
+  setOddNum,
+  setOneToThree,
+  setFourToSix,
+  setCertainNum,
+  setCurrentBet,
+  setRandomResult,
+} = infoSlice.actions;
 export const selectInfo = (state: RootState) => state.info;
 
-export default infoSlice.reducer
+export default infoSlice.reducer;

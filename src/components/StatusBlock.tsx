@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { MiniLoader } from '../UI/MiniLoader';
 import { selectInfo } from '../redux/slices/info';
+import { useSelector } from 'react-redux';
 
 export const StatusBlock = () => {
-  const { status, randomResult, isAuth } = useSelector(selectInfo);
+  const { status, randomResult, isAuth, winAmount } = useSelector(selectInfo);
 
   const renderResult = () => {
     return (
@@ -11,11 +12,22 @@ export const StatusBlock = () => {
           <h4>Сделайте ставку</h4>
         ) : (
           <>
-            <h4>Результат броска кубика: {randomResult}</h4>
-            {status === 'win' ? (
-              <p>Вы выиграли 1 TND!</p>
+            {status === 'pending' ? (
+              <>
+                <h4>Результат броска кубика: ...</h4>
+                <div className="rollWaiting">
+                  <MiniLoader />
+                </div>
+              </>
             ) : (
-              <p>Повезет в следующий раз!</p>
+              <>
+                <h4>Результат броска кубика: {randomResult}</h4>
+                {status === 'win' ? (
+                  <p>Вы выиграли {winAmount} TND!</p>
+                ) : (
+                  <p>Повезет в следующий раз!</p>
+                )}
+              </>
             )}
           </>
         )}
@@ -23,9 +35,5 @@ export const StatusBlock = () => {
     );
   };
 
-  return (
-    <>
-      {isAuth ? renderResult() : <h4>Войдите, чтобы продолжить</h4>}
-    </>
-  );
+  return <>{isAuth ? renderResult() : <h4>Войдите, чтобы продолжить</h4>}</>;
 };
