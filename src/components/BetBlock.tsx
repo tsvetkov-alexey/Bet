@@ -52,21 +52,25 @@ export const BetBlock = () => {
   const handleMakeBet = () => {
     if (cubeRef.current && !cubeRef.current.isRolling) {
       cubeRef.current.rollDice();
-      setRollCount((prev) => prev + 1)
+      setTimeout(() => {
+        setRollCount((prev) => prev + 1)
+      }, 1500)
     }
   };
 
-  useEffect(() => {
-    const betType = evenNum ? 'evenNum' : oddNum ? 'oddNum' : oneToThree ? 'oneToThree' : fourToSix ? 'fourToSix' : 'certainNum';
-    calcResult({
-      diceResult: randomResult,
-      betType,
-      currentBet,
-      balance,
-      setBalance: (newBalance) => dispatch(setBalance(newBalance)),
-      setStatus: (status) => dispatch(setStatus(status)),
-    });
-  }, [cubeRef.current?.isRolling, randomResult, rollCount])
+ useEffect(() => {
+    if (rollCount > 0) {
+      const betType = evenNum ? 'evenNum' : oddNum ? 'oddNum' : oneToThree ? 'oneToThree' : fourToSix ? 'fourToSix' : 'certainNum';
+      calcResult({
+        randomResult,
+        betType,
+        currentBet,
+        balance,
+        setBalance: (newBalance) => dispatch(setBalance(newBalance)),
+        setStatus: (status) => dispatch(setStatus(status)),
+      });
+    }
+  }, [rollCount]);
 
   return (
     <div className='bet-container'>
