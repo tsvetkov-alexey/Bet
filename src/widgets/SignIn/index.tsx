@@ -1,9 +1,9 @@
-import { MiniLoader } from '../UI/MiniLoader';
-import close from '../assets/svg/close.svg';
-import { useFormValidation } from '../hooks/useLoginValidation';
-import { setIsAuth, setModal } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
-import { Modal } from './Modal';
+import { setIsAuth, setModal } from '../../app/redux/slices/info';
+import { useAppDispatch } from '../../app/redux/store';
+import { MiniLoader } from '../../shared/UI/MiniLoader';
+import { useFormValidation } from '../../shared/hooks/useFormValidation';
+import close from '../../shared/svg/close.svg';
+import { Modal } from '../Modal';
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 

@@ -1,13 +1,15 @@
-import arrowDown from '../assets/svg/arrowDown.svg';
-import arrowUp from '../assets/svg/arrowUp.svg';
-import { useDiceInput } from '../hooks/useDiceInput';
-import { selectInfo, setBalance, setStatus, setWinAmount } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
-import { calcResult } from '../utils/calcResult';
-import { BetAmount } from './BetAmount';
-import { BetButtons } from './BetButtons';
-import { Cube } from './Cube';
-import { StatusBlock } from './StatusBlock';
+import { selectInfo, setStatus } from '../../app/redux/slices/info';
+import { selectOptions } from '../../app/redux/slices/options';
+import { selectRandom, setBalance, setWinAmount } from '../../app/redux/slices/random';
+import { useAppDispatch } from '../../app/redux/store';
+import { useDiceInput } from '../../shared/hooks/useDiceInput';
+import arrowDown from '../../shared/svg/arrowDown.svg';
+import arrowUp from '../../shared/svg/arrowUp.svg';
+import { calcResult } from '../../shared/utils/calcResult';
+import { BetAmount } from '../BetAmount';
+import { BetButtons } from '../BetButtons';
+import { Cube } from '../Cube';
+import { StatusBlock } from '../StatusBlock';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -19,17 +21,10 @@ export const BetBlock = () => {
   const betAmountRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useAppDispatch();
-  const {
-    isAuth,
-    evenNum,
-    oddNum,
-    oneToThree,
-    fourToSix,
-    certainNum,
-    currentBet,
-    randomResult,
-    balance,
-  } = useSelector(selectInfo);
+
+  const { isAuth } = useSelector(selectInfo);
+  const { evenNum, oddNum, oneToThree, fourToSix, certainNum } = useSelector(selectOptions);
+  const { currentBet, randomResult, balance } = useSelector(selectRandom);
 
   const { value: certainNumValue, handleChange: handleCertainNumChange } = useDiceInput('');
 

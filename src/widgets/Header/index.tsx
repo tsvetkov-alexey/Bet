@@ -1,9 +1,12 @@
-import { selectInfo, setModal } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
+import { selectInfo, setModal } from '../../app/redux/slices/info';
+import { selectRandom } from '../../app/redux/slices/random';
+import { useAppDispatch } from '../../app/redux/store';
 import { useSelector } from 'react-redux';
 
 export const Header = () => {
-  const { balance, isAuth } = useSelector(selectInfo);
+  const { isAuth } = useSelector(selectInfo);
+  const { balance } = useSelector(selectRandom);
+
   const dispatch = useAppDispatch();
 
   return (

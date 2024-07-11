@@ -4,7 +4,7 @@ import {
   setFourToSix,
   setOddNum,
   setOneToThree,
-} from '../redux/slices/info';
+} from '../../app/redux/slices/options';
 import { useDispatch } from 'react-redux';
 
 interface BetButtonsProps {

@@ -1,5 +1,5 @@
-import { setCertainNumValue } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
+import { setCertainNumValue } from '../../app/redux/slices/options';
+import { useAppDispatch } from '../../app/redux/store';
 import { useState } from 'react';
 
 export const useDiceInput = (initialValue: string | number = '') => {

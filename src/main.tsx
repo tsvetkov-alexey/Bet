@@ -1,6 +1,6 @@
-import App from './App.tsx';
-import { store } from './redux/store.ts';
-import './scss/styles.scss';
+import App from './app/App.tsx';
+import { store } from './app/redux/store.ts';
+import './app/scss/styles.scss';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';

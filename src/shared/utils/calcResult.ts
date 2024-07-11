@@ -3,7 +3,6 @@ interface CalcResultProps {
   certainNumValue: string | number;
   betType: string;
   currentBet: string;
-  // balance: number;
   balance: number | null;
   setBalance: (balance: number) => void;
   setStatus: (status: string) => void;

@@ -1,5 +1,6 @@
-import { setRandomResult, setStatus } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
+import { setStatus } from '../../app/redux/slices/info';
+import { setRandomResult } from '../../app/redux/slices/random';
+import { useAppDispatch } from '../../app/redux/store';
 import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
 export const Cube = forwardRef((_, ref) => {

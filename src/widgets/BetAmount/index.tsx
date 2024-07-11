@@ -1,5 +1,5 @@
-import { setCurrentBet } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
+import { setCurrentBet } from '../../app/redux/slices/random';
+import { useAppDispatch } from '../../app/redux/store';
 
 export const BetAmount = () => {
   const dispatch = useAppDispatch();

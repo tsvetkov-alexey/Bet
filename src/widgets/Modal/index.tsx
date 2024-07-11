@@ -1,5 +1,5 @@
-import { selectInfo, setModal } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
+import { selectInfo, setModal } from '../../app/redux/slices/info';
+import { useAppDispatch } from '../../app/redux/store';
 import { ReactNode, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 

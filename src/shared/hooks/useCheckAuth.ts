@@ -1,5 +1,5 @@
-import { setIsAuth, setPageLoading } from '../redux/slices/info';
-import { useAppDispatch } from '../redux/store';
+import { setIsAuth, setPageLoading } from '../../app/redux/slices/info';
+import { useAppDispatch } from '../../app/redux/store';
 import axios from 'axios';
 import { useEffect } from 'react';
 

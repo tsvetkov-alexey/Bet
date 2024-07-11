@@ -1,9 +1,11 @@
-import { MiniLoader } from '../UI/MiniLoader';
-import { selectInfo } from '../redux/slices/info';
+import { selectInfo } from '../../app/redux/slices/info';
+import { selectRandom } from '../../app/redux/slices/random';
+import { MiniLoader } from '../../shared/UI/MiniLoader';
 import { useSelector } from 'react-redux';
 
 export const StatusBlock = () => {
-  const { status, randomResult, isAuth, winAmount } = useSelector(selectInfo);
+  const { status, isAuth } = useSelector(selectInfo);
+  const { randomResult, winAmount } = useSelector(selectRandom);
 
   const renderResult = () => {
     return (

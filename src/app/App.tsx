@@ -1,6 +1,6 @@
-import { PageLoader } from './UI/PageLoader';
-import { useCheckAuth } from './hooks/useCheckAuth';
-import { Home } from './pages/Home';
+import { Home } from '../pages/Home';
+import { PageLoader } from '../shared/UI/PageLoader';
+import { useCheckAuth } from '../shared/hooks/useCheckAuth';
 import { selectInfo } from './redux/slices/info';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
